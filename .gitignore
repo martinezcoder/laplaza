@@ -1,0 +1,73 @@
+# ─────────────────────────────────────────────────────────────
+# LaPlaza monorepo .gitignore (React Native + Ruby on Rails)
+# ─────────────────────────────────────────────────────────────
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+*.log
+
+# --- Environment / secrets ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ─────────────────────────────────────────────────────────────
+# Node / React Native (apps/mobile)
+# ─────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.expo/
+.expo-shared/
+dist/
+web-build/
+coverage/
+
+# Metro
+.metro-health-check*
+metro.config.local.js
+
+# iOS
+apps/mobile/ios/Pods/
+apps/mobile/ios/build/
+*.xcworkspace/xcuserdata/
+*.xcuserstate
+DerivedData/
+
+# Android
+apps/mobile/android/.gradle/
+apps/mobile/android/build/
+apps/mobile/android/app/build/
+apps/mobile/android/local.properties
+*.keystore
+!debug.keystore
+*.apk
+*.aab
+
+# ─────────────────────────────────────────────────────────────
+# Ruby on Rails (apps/api)
+# ─────────────────────────────────────────────────────────────
+apps/api/tmp/
+apps/api/log/
+apps/api/storage/
+apps/api/public/assets/
+apps/api/public/packs/
+apps/api/.bundle/
+apps/api/vendor/bundle/
+/coverage/
+*.sqlite3
+*.sqlite3-journal
+.byebug_history
+
+# Credentials (Rails master key never committed)
+apps/api/config/master.key
+apps/api/config/credentials/*.key

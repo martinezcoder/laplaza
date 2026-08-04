@@ -63,10 +63,26 @@ There are **two roles** working on LaPlaza:
 - **Product Owner (PO):** owns the _what_ and the _why_; owns `docs/product/` and the
   roadmap. Prioritizes and validates the "done" criteria. **Must explicitly approve every
   increment before it is committed** (see [Approval before commits](#approval-before-commits)).
-- **Engineer:** owns and executes the _how_; owns the architecture and the code.
-  Translates product into implementation and keeps `docs/architecture/` up to date.
+- **Engineer / Architect:** owns and executes the _how_; owns the architecture and the
+  code. Translates product into implementation and keeps `docs/architecture/` up to date.
 
 Both keep `docs/` consistent with what is built.
+
+### Who actually plays these roles
+
+- **Both roles are played by separate AI agents**, not by a single person or a single
+  agent wearing two hats. There is a **PO agent** (drives `docs/product/`, the roadmap,
+  and repo setup such as the remote) and an **Engineer/Architect agent** (drives
+  `docs/architecture/` and the code in `apps/`).
+- **A human orchestrates both agents.** The human is the ultimate authority: they direct
+  each agent, mediate between PO and Engineer/Architect when priorities conflict, and are
+  the one who ultimately grants the approval required in
+  [Approval before commits](#approval-before-commits) — whether given directly or relayed
+  from the PO agent.
+- More agents may join over time (e.g. one per surface: mobile, api, docs). Any new agent
+  onboarding onto this repo should read this file first and follow the same rules: `docs/`
+  is the source of truth, everything recorded is in English, and nothing is committed or
+  pushed without explicit human/PO approval.
 
 ## Conventions
 

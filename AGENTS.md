@@ -2,6 +2,8 @@
 
 Guide for agents (human and AI) working in this repository.
 
+> ⛔ **No commits without explicit approval.** See [Approval before commits](#approval-before-commits).
+
 ## Project description
 
 **LaPlaza** is a mobile app that centralizes the events (sports, cultural, music, etc.)
@@ -59,13 +61,26 @@ laplaza/
 There are **two roles** working on LaPlaza:
 
 - **Product Owner (PO):** owns the _what_ and the _why_; owns `docs/product/` and the
-  roadmap. Prioritizes and validates the "done" criteria.
+  roadmap. Prioritizes and validates the "done" criteria. **Must explicitly approve every
+  increment before it is committed** (see [Approval before commits](#approval-before-commits)).
 - **Engineer:** owns and executes the _how_; owns the architecture and the code.
   Translates product into implementation and keeps `docs/architecture/` up to date.
 
 Both keep `docs/` consistent with what is built.
 
 ## Conventions
+
+### Approval before commits
+
+- **No commits (or pushes) without the PO's explicit, prior approval.** This applies to
+  every increment of code or docs, no exceptions — including AI agents working in this
+  repo.
+- The workflow for any change is: implement/edit → **show the diff to the PO for
+  review** → wait for explicit go-ahead ("commit it", "sí, commitea", etc.) → only then
+  run `git commit` (and `git push`, if applicable).
+- If it is unclear whether approval was given, **ask before committing** — do not assume.
+- This rule overrides any default or habitual behavior of committing automatically after
+  finishing a task.
 
 ### Language
 
@@ -98,3 +113,5 @@ Both keep `docs/` consistent with what is built.
 
 - `main` is the primary branch. Work happens on `type/short-description` branches.
 - Keep **PRs small** and reviewable; the message explains the _why_, not just the _what_.
+- Remember: **no commit happens without prior PO approval** (see
+  [Approval before commits](#approval-before-commits)).

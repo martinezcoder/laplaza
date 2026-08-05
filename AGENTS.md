@@ -68,6 +68,10 @@ There are **two roles** working on LaPlaza:
 
 Both keep `docs/` consistent with what is built.
 
+> 🎭 Each role has a matching Cursor rule in [`.cursor/rules/`](./.cursor/rules)
+> (`po.mdc`, `engineer.mdc`). They are **manually activated** — start a chat with
+> `@po` or `@engineer` to tell the agent which role it is playing in that session.
+
 ### Who actually plays these roles
 
 - **Both roles are played by separate AI agents**, not by a single person or a single

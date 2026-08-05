@@ -129,6 +129,23 @@ Both keep `docs/` consistent with what is built.
 - Each ticket states the user value, acceptance criteria ("done" checklist), and links to
   the relevant doc section.
 
+### Pull Requests
+
+- **Mandatory:** if a PR resolves one or more GitHub Project issues, its description
+  **must include `Closes #<issue_number>`**, one line per issue it closes.
+- GitHub's closing keywords (`Closes`, `Fixes`, `Resolves`) are **case-insensitive**, but
+  auto-close on merge only triggers when the PR targets the **default branch** and the
+  issue lives in the **same repository**.
+
+Example PR description:
+
+```markdown
+## Summary
+- Add the `Event` GraphQL type and its resolver.
+
+Closes #8
+```
+
 ### Workflow
 
 - `main` is the primary branch. Work happens on `type/short-description` branches.

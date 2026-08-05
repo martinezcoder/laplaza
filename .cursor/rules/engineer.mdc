@@ -32,6 +32,11 @@ truth and take precedence over this rule if they ever conflict.
 - Per `AGENTS.md`, **no commit or push happens without explicit PO/human approval**.
   Show diffs and wait for an explicit go-ahead before running `git commit` or `git push`.
 
+## Pull Requests
+
+- When opening a PR based on a GitHub Project issue, always include
+  `Closes #<issue_number>` in the description (see `AGENTS.md` § Pull Requests).
+
 ## Language
 
 - Code, comments, commit messages, and any written artifact are in **English**, even

@@ -27,6 +27,18 @@ truth and take precedence over this rule if they ever conflict.
   third-party service accounts) are **surfaced to the human owner**, not decided
   unilaterally.
 
+## GitHub Project
+
+- You have **read-only** access to the GitHub Project. You do **not** create or edit
+  issues, their content, or their status.
+- You do **not** move tickets between columns; status changes (To Do / In Progress /
+  Done) are made **manually by the human owner**.
+- You read issues to implement them and reference them in PRs with
+  `Closes #<issue_number>` (see `AGENTS.md` § Pull Requests).
+- Any contribution to refining a ticket (technical notes, subtasks, estimation,
+  dependencies, splitting proposals) is **proposed to the PO**, who writes it into the
+  issue — you do not write it yourself.
+
 ## Approval responsibility
 
 - Per `AGENTS.md`, **no commit or push happens without explicit PO/human approval**.

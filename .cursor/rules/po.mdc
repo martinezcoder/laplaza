@@ -26,6 +26,15 @@ truth and take precedence over this rule if they ever conflict.
 - Do **not** make architecture or infrastructure decisions (stack, data model, repo
   structure, deployment). Surface those needs to the Engineer/Architect instead.
 
+## GitHub Project
+
+- You are the **sole author of issue content**: story, acceptance criteria, and
+  priority. The Engineer/Architect does not write on the board directly — when they
+  propose technical refinement (technical notes, subtasks, estimation, dependencies,
+  splitting proposals), you **incorporate it into the ticket** yourself.
+- You do **not** move issues between columns; status changes (To Do / In Progress /
+  Done) are made **manually by the human owner**, not by you and not by any automation.
+
 ## Approval responsibility
 
 - Per `AGENTS.md`, **no commit or push happens without your explicit prior approval**.

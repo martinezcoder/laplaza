@@ -24,7 +24,8 @@ For product or architectural conflicts, surface the discrepancy to the human own
 and reconcile the documentation when appropriate.
 
 For implementation details and technical versions, the existing code and dependency
-manifests are the source of truth.
+manifests are the source of truth. Documentation must never duplicate concrete
+version numbers (see **Versions** below).
 
 ## Project structure
 
@@ -48,13 +49,23 @@ laplaza/
 - **Backend:** Ruby on Rails with a **GraphQL API** (occasional REST where it adds value).
 - **Structure:** monorepo.
 
-Technical versions and dependencies are defined by the project's dependency
-manifests and configuration files. Do not duplicate volatile version information
-in this file.
+Name the stack, not the versions. Concrete versions belong only in project code
+and configuration files (see **Versions** below).
 
 ## Documentation
 
 The `docs/` folder contains the project's product and architecture documentation.
+
+### Versions
+
+Never include concrete version numbers of tools, runtimes, languages, frameworks,
+databases, or dependencies in documentation: `AGENTS.md`, `docs/**`, READMEs, and
+any other product or architecture markdown.
+
+Naming the stack is fine (Rails, PostgreSQL, React Native). Versions live only in
+the project's code and configuration (`Dockerfile`, `docker-compose.yml`,
+`Gemfile`, lockfiles, `package.json`, and similar). Do not invent a version
+inventory in docs.
 
 ### Product
 

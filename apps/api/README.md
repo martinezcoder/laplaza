@@ -67,6 +67,6 @@ Main MVP responsibilities:
 ## Pending scaffolding
 
 The next increment generates the full Rails app (not API-only) from this Docker
-environment. Planned pins: Ruby **3.3.6**, Rails **8.1**, PostgreSQL **16**.
+environment.
 
 The **product source of truth** lives in [`/docs`](../../docs).

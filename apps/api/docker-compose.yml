@@ -1,0 +1,43 @@
+name: laplaza-api
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - "${API_PORT:-3000}:3000"
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: "5432"
+      DATABASE_USER: ${POSTGRES_USER:-laplaza}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-laplaza}
+      DATABASE_NAME: ${POSTGRES_DB:-laplaza_development}
+      DATABASE_URL: postgres://${POSTGRES_USER:-laplaza}:${POSTGRES_PASSWORD:-laplaza}@postgres:5432/${POSTGRES_DB:-laplaza_development}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    stdin_open: true
+    tty: true
+    init: true
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-laplaza}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-laplaza}
+      POSTGRES_DB: ${POSTGRES_DB:-laplaza_development}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-laplaza} -d ${POSTGRES_DB:-laplaza_development}"]
+      interval: 2s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:

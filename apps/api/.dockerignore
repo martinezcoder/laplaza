@@ -1,0 +1,3 @@
+# The image does not COPY the app; source is bind-mounted at runtime.
+*
+!Dockerfile

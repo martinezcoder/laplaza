@@ -2,7 +2,7 @@
 
 Guide for agents (human and AI) working in this repository.
 
-> ⛔ **No commits without explicit approval.** See [Approval before commits](#approval-before-commits).
+> ⛔ **No commits or pushes without explicit human approval.**
 
 ## Project description
 
@@ -12,21 +12,35 @@ Today this information is scattered across Facebook and Instagram.
 
 We start **with a small town in Spain** as the pilot location.
 
-## 📌 Source of truth
+## Source of truth
 
-> **The product source of truth is the [`docs/`](./docs) folder.**
->
-> Read `docs/` before implementing anything. If code and documentation conflict, `docs/`
-> wins (and a change is opened to reconcile them). Any relevant product or architecture
-> decision must be reflected there.
+The `docs/` folder is the source of truth for product and architectural decisions.
 
-Key documents:
+- `docs/product/` defines what LaPlaza should do and why.
+- `docs/architecture/` defines significant technical and architectural decisions.
 
-- [`docs/product/vision.md`](./docs/product/vision.md) — problem, user, and value proposition.
-- [`docs/product/mvp-scope.md`](./docs/product/mvp-scope.md) — MVP scope and what is out.
-- [`docs/architecture/overview.md`](./docs/architecture/overview.md) — monorepo architecture.
-- [`docs/architecture/data-model.md`](./docs/architecture/data-model.md) — data model.
-- [`docs/roadmap.md`](./docs/roadmap.md) — phases and milestones.
+When documentation and code disagree, do not silently assume which one is correct.
+For product or architectural conflicts, surface the discrepancy to the human owner
+and reconcile the documentation when appropriate.
+
+For implementation details and technical versions, the existing code and dependency
+manifests are the source of truth.
+
+## Project structure
+
+LaPlaza is a monorepo.
+
+```text
+laplaza/
+├── AGENTS.md
+├── .gitignore
+├── apps/
+│   ├── mobile/          # React Native mobile application
+│   └── api/             # Rails backend and GraphQL API
+└── docs/
+    ├── product/
+    └── architecture/
+```
 
 ## Target stack
 
@@ -34,146 +48,125 @@ Key documents:
 - **Backend:** Ruby on Rails with a **GraphQL API** (occasional REST where it adds value).
 - **Structure:** monorepo.
 
-> Note: the stack is **documented but not yet installed**. `apps/mobile` and `apps/api`
-> are placeholders pending scaffolding.
+Technical versions and dependencies are defined by the project's dependency
+manifests and configuration files. Do not duplicate volatile version information
+in this file.
 
-## Monorepo structure
+## Documentation
 
-```text
-laplaza/
-├── AGENTS.md            # This guide
-├── .gitignore
-├── apps/
-│   ├── mobile/          # React Native app (placeholder)
-│   └── api/             # Rails + GraphQL backend (placeholder)
-└── docs/                # 📌 Product source of truth
-    ├── product/
-    │   ├── vision.md
-    │   └── mvp-scope.md
-    ├── architecture/
-    │   ├── overview.md
-    │   └── data-model.md
-    └── roadmap.md
-```
+The `docs/` folder contains the project's product and architecture documentation.
 
-## Roles
+### Product
 
-There are **two roles** working on LaPlaza:
+`docs/product/` contains product requirements and decisions.
 
-- **Product Owner (PO):** owns the _what_ and the _why_; owns `docs/product/` and the
-  roadmap. Prioritizes and validates the "done" criteria. **Must explicitly approve every
-  increment before it is committed** (see [Approval before commits](#approval-before-commits)).
-- **Engineer / Architect:** owns and executes the _how_; owns the architecture and the
-  code. Translates product into implementation and keeps `docs/architecture/` up to date.
+Relevant documents include:
 
-Both keep `docs/` consistent with what is built.
+- `docs/product/vision.md` — problem, users, and value proposition.
+- `docs/product/mvp-scope.md` — MVP scope and what is out.
+- `docs/roadmap.md` — phases and milestones.
 
-> 🎭 Each role has a matching Cursor rule in [`.cursor/rules/`](./.cursor/rules)
-> (`po.mdc`, `engineer.mdc`). They are **manually activated** — start a chat with
-> `@po` or `@engineer` to tell the agent which role it is playing in that session.
+Read the relevant product documentation before implementing product functionality.
 
-### Who actually plays these roles
+### Architecture
 
-- **Both roles are played by separate AI agents**, not by a single person or a single
-  agent wearing two hats. There is a **PO agent** (drives `docs/product/`, the roadmap,
-  and repo setup such as the remote) and an **Engineer/Architect agent** (drives
-  `docs/architecture/` and the code in `apps/`).
-- **A human orchestrates both agents.** The human is the ultimate authority: they direct
-  each agent, mediate between PO and Engineer/Architect when priorities conflict, and are
-  the one who ultimately grants the approval required in
-  [Approval before commits](#approval-before-commits) — whether given directly or relayed
-  from the PO agent.
-- More agents may join over time (e.g. one per surface: mobile, api, docs). Any new agent
-  onboarding onto this repo should read this file first and follow the same rules: `docs/`
-  is the source of truth, everything recorded is in English, and nothing is committed or
-  pushed without explicit human/PO approval.
+`docs/architecture/` contains important technical decisions and architectural
+documentation.
 
-## Conventions
+Relevant documents include:
+
+- `docs/architecture/overview.md` — system architecture.
+- `docs/architecture/data-model.md` — data model.
+
+Read the relevant architecture documentation before making significant technical
+or architectural changes.
+
+Documentation should reflect important decisions and remain consistent with the
+implementation. It should not unnecessarily block development.
+
+## Development
+
+When given a sufficiently clear task:
+
+1. Understand the relevant product requirements and existing implementation.
+2. Inspect the existing code before making changes.
+3. Choose a reasonable implementation based on the existing architecture and conventions.
+4. Implement the change.
+5. Add or update tests where appropriate.
+6. Run the relevant tests and checks.
+7. Summarize what changed and any relevant decisions.
+
+Prefer working software over unnecessary planning.
+
+Do not create, refine, split, or rewrite tickets unless explicitly asked.
+
+Do not ask for clarification when a reasonable implementation can be inferred.
+Ask only when an ambiguity would materially affect the product or implementation.
+
+Keep changes small and focused.
+
+## Product decisions
+
+Do not unilaterally change product scope or requirements.
+
+If an important product decision is not covered by the existing documentation and
+cannot reasonably be inferred, surface it to the human owner before proceeding.
+
+## Technical decisions
+
+Use the existing architecture and conventions unless there is a good reason to
+change them.
+
+Technical implementation decisions belong to the development agent.
+
+For significant architectural changes:
+
+- consider the trade-offs before implementing them;
+- explain the decision to the human owner;
+- update the relevant documentation in `docs/architecture/`.
+
+Do not introduce dependencies, abstractions, or infrastructure without a clear reason.
+
+## Language
+
+- **Code, code comments, documentation, issues, PRs, and commit messages:** English.
+- **User-facing application copy:** Spanish.
+- User-facing strings must be localization-ready.
+
+## Git
 
 ### Approval before commits
 
-- **No commits (or pushes) without the PO's explicit, prior approval.** This applies to
-  every increment of code or docs, no exceptions — including AI agents working in this
-  repo.
-- The workflow for any change is: implement/edit → **show the diff to the PO for
-  review** → wait for explicit go-ahead ("commit it", "sí, commitea", etc.) → only then
-  run `git commit` (and `git push`, if applicable).
-- If it is unclear whether approval was given, **ask before committing** — do not assume.
-- This rule overrides any default or habitual behavior of committing automatically after
-  finishing a task.
-
-### Language
-
-- **Everything recorded is written in English.** Even though the team speaks Spanish,
-  all persisted artifacts — **documentation, requirement tickets, issues, PRs, commit
-  messages, code, branches, and comments** — must be in **English**.
-- **Spoken/chat communication** between the PO and the engineer can be in Spanish; only
-  what gets **written down** must be in English.
-- **User-facing app copy** is in **Spanish** (the pilot is a Spanish town), built to be
-  **i18n-ready** so other languages can be added later. UI strings live in
-  localization files, never hardcoded, with Spanish (`es`) as the default locale.
+- Do not commit or push without explicit prior approval from the human owner.
+- After implementing a change, show or summarize the relevant diff and wait for
+  explicit approval before running `git commit`.
+- If it is unclear whether approval was given, ask before committing.
+- This applies to both human-directed and AI-assisted development.
 
 ### Commits
 
-- [Conventional Commits](https://www.conventionalcommits.org/):
-  `type(scope): summary`, e.g.:
-  - `feat(api): add Event GraphQL type`
-  - `fix(mobile): correct wall date ordering`
-  - `docs: refine mvp scope`
-- Common types: `feat`, `fix`, `docs`, `chore`, `refactor`, `test`, `build`, `ci`.
-- Suggested scopes: `mobile`, `api`, `docs`, `repo`.
+Use Conventional Commits:
 
-### Requirement tickets
+`type(scope): summary`
 
-- Written in **English**, product-driven, and traceable back to `docs/`.
-- Each ticket states the user value, acceptance criteria ("done" checklist), and links to
-  the relevant doc section.
-- Foundation / bootstrap tickets may be engineer-facing ("as an engineer, so that…");
-  they still need explicit user or developer value.
-- A ticket is **ready** only if it meets the Definition of Ready below. Coarse tickets
-  (one issue hiding several independent increments) must be split before implementation.
+Examples:
 
-#### Definition of Ready
+- `feat(api): add Event GraphQL type`
+- `fix(mobile): correct event ordering`
+- `docs: update architecture overview`
 
-A ticket is ready only if **all** of the following are true:
+Common types include:
 
-1. **One increment, one PR.** If an engineer would naturally make a checklist of three or
-   more distinct deliverables (environment, scaffold, tests, a feature, …), split into
-   separate issues. Do not hide that work behind a long checklist in a single issue.
-2. **Closable independently.** Merging it leaves the repo in a useful, documented state
-   even if the next ticket never happens.
-3. **Size S or M.** **L is a smell:** split unless the work is truly atomic. If an L is
-   kept, the ticket must justify why it cannot be split.
-4. **Outcome, not implementation.** Acceptance criteria describe the observable result.
-   Tooling and layout choices (Compose services/ports/volumes, RSpec vs Minitest, Expo vs
-   React Native CLI, gem selection) belong to the Engineer and are recorded in
-   `docs/architecture/` when decided — not dictated in the ticket. Notes may list a
-   likely tool as *"expected default, engineer confirms"*. Exceptions already decided by
-   the human owner are encoded as outcomes and must not be reopened (currently: Docker
-   Compose for local PostgreSQL for `apps/api`; Ruby **3.3.6**; Rails **8.1**).
-5. **Explicit boundaries.** Dependencies, epic link, and a **Not in this ticket**
-   section so work does not leak back into a mega-issue.
+`feat`, `fix`, `docs`, `chore`, `refactor`, `test`, `build`, `ci`.
 
-### Pull Requests
+Keep commits focused and meaningful.
 
-- **Mandatory:** if a PR resolves one or more GitHub Project issues, its description
-  **must include `Closes #<issue_number>`**, one line per issue it closes.
-- GitHub's closing keywords (`Closes`, `Fixes`, `Resolves`) are **case-insensitive**, but
-  auto-close on merge only triggers when the PR targets the **default branch** and the
-  issue lives in the **same repository**.
+## Pull Requests
 
-Example PR description:
+When a PR resolves a GitHub issue, its description should include the appropriate
+closing keyword, such as:
 
-```markdown
-## Summary
-- Add the `Event` GraphQL type and its resolver.
+`Closes #123`
 
-Closes #8
-```
-
-### Workflow
-
-- `main` is the primary branch. Work happens on `type/short-description` branches.
-- Keep **PRs small** and reviewable; the message explains the _why_, not just the _what_.
-- Remember: **no commit happens without prior PO approval** (see
-  [Approval before commits](#approval-before-commits)).
+Keep PRs small and reviewable. The description should explain the purpose and
+impact of the change, not merely repeat the implementation details.

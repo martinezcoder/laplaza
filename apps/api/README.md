@@ -1,7 +1,55 @@
 # apps/api — LaPlaza (Ruby on Rails)
 
-> ⚠️ **Placeholder.** This folder does not contain the Rails project yet.
-> Scaffolding will happen in a later session (out of scope for the bootstrap).
+The Rails application is **not generated yet**. This folder holds the Docker
+development environment so the API can be generated and run later without
+installing Ruby, Rails, or PostgreSQL on the host.
+
+## Local development (Docker)
+
+The host only needs Docker. Do not install Ruby, Rails, or PostgreSQL on the host.
+
+From this directory (`apps/api`):
+
+```sh
+docker compose up --build
+```
+
+Detached:
+
+```sh
+docker compose up --build -d
+```
+
+Stop (keeps the Postgres data volume):
+
+```sh
+docker compose down
+```
+
+Stop and delete the Postgres data volume:
+
+```sh
+docker compose down -v
+```
+
+Optional overrides: copy `.env.example` to `.env`. Compose already has working defaults.
+
+### Check that the environment is up
+
+```sh
+docker compose exec api ruby -v
+docker compose exec api rails -v
+docker compose exec api pg_isready -h postgres -U laplaza
+```
+
+Open a shell in the development container:
+
+```sh
+docker compose exec api bash
+```
+
+The container bind-mounts this directory at `/app`. The Rails app will be generated
+here in a later increment.
 
 ## What will live here
 
@@ -18,11 +66,7 @@ Main MVP responsibilities:
 
 ## Pending scaffolding
 
-When the project is initialized here, decisions to make include:
-
-- Ruby/Rails version and API-only vs full mode (we need views for the backoffice).
-- GraphQL gem (`graphql-ruby`).
-- Database (planned default: **PostgreSQL**).
-- Job runner for reminders (e.g. Sidekiq / Solid Queue).
+The next increment generates the full Rails app (not API-only) from this Docker
+environment. Planned pins: Ruby **3.3.6**, Rails **8.1**, PostgreSQL **16**.
 
 The **product source of truth** lives in [`/docs`](../../docs).

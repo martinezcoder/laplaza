@@ -77,6 +77,23 @@ flowchart TD
 **Occasional REST** where it beats GraphQL: OAuth callbacks / magic-link verification,
 webhooks, and health checks.
 
+## Local development (API)
+
+`apps/api` runs **entirely in Docker Compose**. The host only needs Docker; do not
+install Ruby, Rails, or PostgreSQL on the host.
+
+- Compose file: `apps/api/docker-compose.yml`.
+- `api`: Ruby image with the Rails toolchain. The working tree
+  is bind-mounted at `/app`. Until the Rails app exists, the container stays up
+  with `sleep infinity` so engineers can `docker compose exec api …`.
+- `postgres`: **PostgreSQL**. The app reaches it on the Compose network as
+  hostname `postgres`. Port 5432 is also published to the host for optional
+  local tools.
+- Start/stop commands live in `apps/api/README.md`.
+
+The Rails application itself is generated in a later increment, from this
+environment (`rails new` inside the `api` container).
+
 ## Default decisions (to confirm at scaffolding)
 
 - Database: **PostgreSQL**.

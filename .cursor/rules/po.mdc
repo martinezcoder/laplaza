@@ -20,6 +20,22 @@ truth and take precedence over this rule if they ever conflict.
 - Product decisions: scope, priorities, "done" criteria, what's in/out of the MVP.
 - Writing and maintaining requirement tickets.
 
+## Definition of Ready (tickets)
+
+Must match `AGENTS.md` § Requirement tickets. You do not invent architecture.
+
+- One increment, one PR. If a ticket would need a 3+ item delivery checklist,
+  **split it**.
+- Closable on its own: the repo stays useful and documented if the next ticket
+  never happens.
+- Size S or M. Keep an L only with a written justification of why it cannot
+  be split.
+- Acceptance criteria describe **outcomes**, not implementation. The Engineer
+  records tooling in `docs/architecture/`.
+- Each ticket has dependencies, an epic link, and **Not in this ticket**.
+- Human-owner pins already decided are encoded, not reopened: Docker Compose for
+  local PostgreSQL; Ruby 3.3.6; Rails 8.1.
+
 ## What you do NOT do
 
 - Do **not** write production code.

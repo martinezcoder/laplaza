@@ -128,6 +128,31 @@ Both keep `docs/` consistent with what is built.
 - Written in **English**, product-driven, and traceable back to `docs/`.
 - Each ticket states the user value, acceptance criteria ("done" checklist), and links to
   the relevant doc section.
+- Foundation / bootstrap tickets may be engineer-facing ("as an engineer, so that…");
+  they still need explicit user or developer value.
+- A ticket is **ready** only if it meets the Definition of Ready below. Coarse tickets
+  (one issue hiding several independent increments) must be split before implementation.
+
+#### Definition of Ready
+
+A ticket is ready only if **all** of the following are true:
+
+1. **One increment, one PR.** If an engineer would naturally make a checklist of three or
+   more distinct deliverables (environment, scaffold, tests, a feature, …), split into
+   separate issues. Do not hide that work behind a long checklist in a single issue.
+2. **Closable independently.** Merging it leaves the repo in a useful, documented state
+   even if the next ticket never happens.
+3. **Size S or M.** **L is a smell:** split unless the work is truly atomic. If an L is
+   kept, the ticket must justify why it cannot be split.
+4. **Outcome, not implementation.** Acceptance criteria describe the observable result.
+   Tooling and layout choices (Compose services/ports/volumes, RSpec vs Minitest, Expo vs
+   React Native CLI, gem selection) belong to the Engineer and are recorded in
+   `docs/architecture/` when decided — not dictated in the ticket. Notes may list a
+   likely tool as *"expected default, engineer confirms"*. Exceptions already decided by
+   the human owner are encoded as outcomes and must not be reopened (currently: Docker
+   Compose for local PostgreSQL for `apps/api`; Ruby **3.3.6**; Rails **8.1**).
+5. **Explicit boundaries.** Dependencies, epic link, and a **Not in this ticket**
+   section so work does not leak back into a mega-issue.
 
 ### Pull Requests
 
